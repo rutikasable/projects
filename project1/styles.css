@@ -1,0 +1,40 @@
+
+body {
+  font-family: system-ui, sans-serif;
+  color:white;
+  background-color:#212121;
+  text-align: center;
+}
+
+.one {
+  color :#002375;
+  text-align :center;
+  -webkit-text-stroke: 0.2px white;
+}
+
+.button {
+    color: white;
+    padding: 10px 20px;
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+#red {
+  background-color: #ff9999;
+}
+#blue {
+  background-color: #999BFF;
+}
+#orange {
+  background-color: #FFD199;
+}
+#violet {
+  background-color: #D499FF;
+}
+#green {
+  background-color: #9EFF99;
+}
+

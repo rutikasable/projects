@@ -1,0 +1,67 @@
+body {
+  background-color: rgba(0, 0, 0, 0.821);
+  color: aliceblue;
+  text-align: center;
+}
+
+h1 {
+  color: yellow;
+  text-shadow:
+  -1px -1px 0 black,
+   1px -1px 0 black,
+  -1px  1px 0 black,
+   1px  1px 0 black,
+  -2px  0px 0 black,
+   2px  0px 0 black,
+   0px -2px 0 black,
+   0px  2px 0 black;
+}
+
+#input {
+  font-size: large;
+  background-color: rgb(255, 255, 255);
+  border-radius: 152px;
+  border: 3px solid black;
+  text-align: center;
+  width: 200px;
+  height: 30px;
+}
+
+#button {
+  font-size: large;
+  background-color: yellow;
+  border: 2px solid black;
+  color: black;
+  border-radius: 25px;
+  width: 90px;
+  height: 30px;
+}
+
+#comment {
+  font-size:x-large;
+  color: yellow;
+}
+
+#win {
+  font-size:x-large;
+  color: green;
+}
+
+#loss{
+  font-size:x-large;
+  color: red;
+}
+
+#restart {
+  font-size: xx-large;
+  color: yellow;
+  text-shadow:
+  -1px -1px 0 black,
+   1px -1px 0 black,
+  -1px  1px 0 black,
+   1px  1px 0 black,
+  -2px  0px 0 black,
+   2px  0px 0 black,
+   0px -2px 0 black,
+   0px  2px 0 black;
+}

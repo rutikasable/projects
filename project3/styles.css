@@ -1,0 +1,20 @@
+body {
+  font-family: system-ui, sans-serif;
+  color:aliceblue;
+  background-color: #313131;
+  display: flex;
+  justify-content: center;
+}  
+
+#text {
+  text-align: center;
+}
+
+#clock {
+  height: 50px;
+  width: 200px;
+  background-color: rgba(2, 247, 255, 0.259);
+  border-radius: 25px;
+  text-align: center;
+  font-size: 31px;
+}

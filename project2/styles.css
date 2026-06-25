@@ -1,0 +1,23 @@
+body {
+  background-color: #1E1A4D;
+  color: aliceblue;
+  font-family: system-ui, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+
+input {
+  border: 2px solid grey;
+  border-radius: 6px;
+}
+
+button {
+  border: 2px solid grey;
+  border-radius: 6px;
+}
