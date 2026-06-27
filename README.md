@@ -1,1 +1,1 @@
-view these projects at : rutikasable.verecel.app
+view these projects at : rutikasable.vercel.app
