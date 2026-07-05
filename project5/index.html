@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>BACKGROUND COLOR SELECTOR</h1>
+    <button id="st">Start</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="sp">Stop</button>
+</body>
+<style>
+    body {
+        background-color: #212121;
+        color:aliceblue ;
+        text-align: center;
+    }
+    h1 {
+        background-color: #313131;
+        border-radius: 10px;
+    }
+    button {
+        background-color:rgb(175, 175, 175);
+        color: #313131;
+        border-radius: 7px;
+    }
+</style>
+<script>
+    const random = function () {
+        const hex = '0123456789ABCDEF';
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+           color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    let change;
+
+    document.querySelector("#st").addEventListener('click', () => {
+        clearInterval(change);
+        change = setInterval(() => {
+            document.body.style.backgroundColor = random();
+        },1000)
+    })
+
+    document.querySelector("#sp").addEventListener('click', ()=> {
+        clearInterval(change);
+    })
+</script>
+</html>
