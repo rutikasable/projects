@@ -3,67 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
-    <title>My Projects</title>
+    <title>Projects</title>
 </head>
 <body>
-    <h1>PROJECTS</h1>
-
-<div>
-    <button onclick="location.href='project1/'">
-        Project 1 : COLOR SWITCHER
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project2/'">
-        Project 2 : BMI CALCULATOR
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project3/'">
-        Project 3 : LOCAL TIME
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project4/'">
-        Project 4 : NUMBER GUESSING GAME
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project5/'">
-        Project 5 : TIME START-STOP
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project6/'">
-        Project 6 : BACKGROUND COLOR SELECTOR
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project7/'">
-        Project 7 : KEY CODE
-    </button>
-</div>
-<br>
-
-<div>
-    <button onclick="location.href='project8/'">
-        Project 8 : GITHUB DATA
-    </button>
-</div>
-<br>
-
+    <div class="card">
+        <button  onclick="location.href='practice projects/'">Practice Projects</button>
+        <br><br>
+        <button>Final Projects</button>
+    </div>
 </body>
-</html
+<style>
+    body {
+        background-color: #DFBE99;
+        color: #5E747F;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 40px 20px;
+    }
+
+    button {
+        width: 500px;
+        padding: 14px 20px;
+        margin: 10px 0;
+
+        background-color: #EC9192;
+        color: white;
+
+        border: 3px solid #DB5375;
+        border-radius: 25px;
+
+        font-size: 1rem;
+        font-weight: 600;
+
+        cursor: pointer;
+        transition: all 0.25s ease;
+    }
+
+    button:hover {
+        background-color: #E47284;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(219, 83, 117, 0.25);
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+</style>
+</html>
