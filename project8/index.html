@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>github</title>
+</head>
+<body>
+    <div class="card">
+        <div>
+            <input type="url" id="url" placeholder="Enter url">
+            <br><br>
+            <button id="button">GET</button>
+      
+            <p id="zero"></p>
+            <p id="one"></p>
+            <p id="two"></p>
+            <p id="three"></p>
+        </div> 
+    </div>       
+</body>
+<style>
+    body {  
+    background-color: #323232;
+    color: aliceblue;
+    margin: 0;
+    height : 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .card {
+        background-color: #212121;
+        border-radius: 25px;
+        width: 600px;
+        height: 400px;  
+        
+        display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;      
+        text-align: center;      
+    }
+
+    #zero img {
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        object-fit: cover;
+    }
+    
+</style>
+<script>
+    
+    // const link = "https://api.github.com/users/rutikasable";
+    // let x = new XMLHttpRequest();
+    // x.open('GET',link);
+    //console.log(x.readyState);
+    // x.onreadystatechange = function () {
+    //     console.log(x.readyState);
+    //     if (x.readyState===4){
+    //         let a = JSON.parse(this.responseText);
+    //         console.log(typeof a);
+    //         console.log(a.followers);
+    //     }
+    // }
+    // x.send();
+
+    
+    let zero = document.querySelector("#zero");
+    let one = document.querySelector("#one");
+    let two = document.querySelector("#two");
+    let three = document.querySelector("#three");
+    let button = document.querySelector("#button");
+    let url = document.querySelector("#url");
+
+    button.addEventListener('click',function() {
+        let link = document.querySelector("#url").value;
+        let x = new XMLHttpRequest();
+        x.open('GET',link);
+        x.onreadystatechange = function () {
+            if (x.readyState === 4) {
+                let a = JSON.parse(this.responseText);
+                // console.log(a);
+                let arr = [a.avatar_url, a.login, a.bio, a.followers];   
+                show(arr);   
+            }
+        }
+        x.send();
+    });
+
+    function show(arr) {
+
+        zero.innerHTML = `<img src = "${arr[0]}">`;
+        one.innerHTML = `Userame : ${arr[1]}`;
+        two.innerHTML = `Bio : ${arr[2]}`;
+        three.innerHTML = `Followers : ${arr[3]}`;
+        button.style.display = "none";
+        url.style.display = "none";
+    }
+    
+</script>
+</html>

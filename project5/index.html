@@ -6,48 +6,41 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>BACKGROUND COLOR SELECTOR</h1>
-    <button id="st">Start</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button id="sp">Stop</button>
+    <h1>Stopwatch</h1>
+    <button id="start">Start</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="stop">Stop</button>
+    <br><br>
+    <input type="text" id="display">
 </body>
 <style>
     body {
         background-color: #212121;
-        color:aliceblue ;
+        font-family: Arial, sans-serif;
         text-align: center;
+        padding-top: 50px;
+        color: #ffffff;
     }
-    h1 {
-        background-color: #313131;
-        border-radius: 10px;
-    }
-    button {
-        background-color:rgb(175, 175, 175);
-        color: #313131;
-        border-radius: 7px;
+    input {
+        text-align: center;
     }
 </style>
 <script>
-    const random = function () {
-        const hex = '0123456789ABCDEF';
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-           color += hex[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+    let time;
+    let stbtn = document.querySelector("#start");
+    let spbtn = document.querySelector("#stop");
 
-    let change;
-
-    document.querySelector("#st").addEventListener('click', () => {
-        clearInterval(change);
-        change = setInterval(() => {
-            document.body.style.backgroundColor = random();
-        },1000)
+    stbtn.addEventListener('click',function () {
+        clearInterval(time);
+        time = setInterval(() => {
+            let n = new Date();
+            document.querySelector("#display").value  = `Time is : ${n.toLocaleTimeString()}`;
+        }, 1000);
+    })
+    
+    spbtn.addEventListener('click',function () {
+        clearInterval(time);
     })
 
-    document.querySelector("#sp").addEventListener('click', ()=> {
-        clearInterval(change);
-    })
 </script>
 </html>

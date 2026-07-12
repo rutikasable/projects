@@ -6,48 +6,48 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="insert">
-        <div id="key">PRESS ANY KEY</div>
-    </div>
+    <h1>BACKGROUND COLOR SELECTOR</h1>
+    <button id="st">Start</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="sp">Stop</button>
 </body>
 <style>
     body {
-        background-color:rgb(255, 94, 121);
-        color:aliceblue;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    #table,tr,td {
-        border: 2px solid #212121;
-        color:aliceblue;
-        background-color:rgb(255, 56, 89);
-        padding: 20px;
+        background-color: #212121;
+        color:aliceblue ;
         text-align: center;
     }
+    h1 {
+        background-color: #313131;
+        border-radius: 10px;
+    }
+    button {
+        background-color:rgb(175, 175, 175);
+        color: #313131;
+        border-radius: 7px;
+    }
 </style>
-<script>  
-    let insert = document.querySelector("#insert");
+<script>
+    const random = function () {
+        const hex = '0123456789ABCDEF';
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+           color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 
-    window.addEventListener('keydown', (e) => {
-        insert.innerHTML = 
-        `
-        <div id="table">
-            <table>
-                <tr>
-                    <td>Key</td>
-                    <td>Keycode</td>
-                    <td>Code</td>
-                </tr>
-                <tr>
-                    <td>${e.key ===" "? "Space":e.key}</td>
-                    <td>${e.keyCode}</td>
-                    <td>${e.code}</td>
-                </tr>
-            </table>    
-        </div>
-        `
+    let change;
+
+    document.querySelector("#st").addEventListener('click', () => {
+        clearInterval(change);
+        change = setInterval(() => {
+            document.body.style.backgroundColor = random();
+        },1000)
+    })
+
+    document.querySelector("#sp").addEventListener('click', ()=> {
+        clearInterval(change);
     })
 </script>
 </html>

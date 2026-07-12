@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="insert">
+        <div id="key">PRESS ANY KEY</div>
+    </div>
+</body>
+<style>
+    body {
+        background-color:rgb(255, 94, 121);
+        color:aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #table,tr,td {
+        border: 2px solid #212121;
+        color:aliceblue;
+        background-color:rgb(255, 56, 89);
+        padding: 20px;
+        text-align: center;
+    }
+</style>
+<script>  
+    let insert = document.querySelector("#insert");
+
+    window.addEventListener('keydown', (e) => {
+        insert.innerHTML = 
+        `
+        <div id="table">
+            <table>
+                <tr>
+                    <td>Key</td>
+                    <td>Keycode</td>
+                    <td>Code</td>
+                </tr>
+                <tr>
+                    <td>${e.key ===" "? "Space":e.key}</td>
+                    <td>${e.keyCode}</td>
+                    <td>${e.code}</td>
+                </tr>
+            </table>    
+        </div>
+        `
+    })
+</script>
+</html>
