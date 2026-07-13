@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice</title>
+</head>
+<body>
+    <h1>DICE ROLLER</h1>
+    <h4>How many times do you want to roll the dice?<br>Enter the number below.</h4>
+    <br>
+    <div>
+        <input id="ip" type="number" placeholder="Enter a number here.">
+        <br><br>
+        <button id="bt">ROLL</button>
+    </div>
+    <br>
+    <div id="op">
+        
+    </div>
+</body>
+
+<style>
+    body {
+        background-color: #454545;
+        color: antiquewhite;
+    }
+
+    #op {
+        background-color: white;
+        height: 50px;
+        width: 50px;
+        border-radius: 11px;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+    let ip = document.querySelector("#ip");
+    let input;
+    let button = document.querySelector("#bt");
+    let output = document.querySelector("#op");
+
+    button.addEventListener('click', function (e) {
+        input = Number(ip.value);
+        let count = 0;
+
+        let interval = setInterval(function () {
+            let r = Math.floor((Math.random()*6)+1);
+            output.innerHTML = `${r}`;
+            count++;
+            
+            if (count === input){
+                clearInterval(interval);
+            }
+        },1000);
+
+    })
+
+</script>
+
+</html>
+<!--alt 0149-->
