@@ -16,47 +16,70 @@
     </div>
     <br>
     <div id="op">
-        
+        <div id="dice">
+            
+        </div>
     </div>
 </body>
 
 <style>
     body {
         background-color: #454545;
-        color: antiquewhite;
+        color: aliceblue;
+        text-align: center;
+    }
+
+    #ip {
+        text-align: center;
     }
 
     #op {
-        background-color: white;
-        height: 50px;
-        width: 50px;
-        border-radius: 11px;
-        color: black;
+        display: flex;
+        justify-content: center;
+    }
+
+    #dice {
+        color: white;
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 200px;
     }
 </style>
 
 <script>
     let ip = document.querySelector("#ip");
-    let input;
     let button = document.querySelector("#bt");
-    let output = document.querySelector("#op");
+    let output = document.querySelector("#dice");
 
-    button.addEventListener('click', function (e) {
-        input = Number(ip.value);
+    ip.addEventListener('focus',function() {
+        output.innerHTML = "";
+    })
+
+    let interval;
+
+    button.addEventListener('click', function () {
+        let input = Number(ip.value);
+
+        if (input <= 0 || isNaN(input)) {
+            alert("Enter a valid number");
+            return;
+        }
+
         let count = 0;
 
-        let interval = setInterval(function () {
-            let r = Math.floor((Math.random()*6)+1);
-            output.innerHTML = `${r}`;
+        clearInterval(interval);
+
+        interval = setInterval(function () {
+            const dice = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+            let r = Math.floor(Math.random()*6);
+            output.textContent = dice[r];
             count++;
             
             if (count === input){
                 clearInterval(interval);
             }
-        },1000);
+        },100);
 
     })
 
