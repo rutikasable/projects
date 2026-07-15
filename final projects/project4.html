@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    
+    <div class="calculator">
+        <input type="text" id="display">
+
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="backspace()">⌫</button>
+            <button onclick="setOperator('%')">%</button>
+            <button onclick="setOperator('/')">/</button>
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button onclick="setOperator('*')">*</button>
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button onclick="setOperator('-')">-</button>
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button onclick="setOperator('+')">+</button>
+            <button onclick="changeSign()">+/-</button>
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+            <button onclick="calculate()">=</button>
+        </div>
+    </div>
+</body>
+
+<style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, sans-serif;
+    }
+
+    body{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#222;
+    }
+
+    .calculator{
+        background:#333;
+        padding:20px;
+        border-radius:10px;
+    }
+
+    #display{
+        width:100%;
+        height:90px;
+        margin-bottom:15px;
+        text-align:right;
+        font-size:25px;
+        padding:10px;
+    }
+
+    .buttons{
+        display:grid;
+        grid-template-columns:repeat(4,90px);
+
+    }
+
+    button{
+        height:90px;
+        font-size:20px;
+        cursor:pointer;
+    }
+
+</style>
+
+<script>
+    let display = document.querySelector("#display");
+
+    let firstnum = "";
+    let secondnum = "";
+    let oper = "";
+
+    function append(value) {
+
+        // Prevent multiple decimal points
+        if (value === ".") {
+            if (oper === "") {
+                if (firstnum.includes(".")) return;
+            } else {
+                if (secondnum.includes(".")) return;
+            }
+        }
+
+        if (oper === "") {
+            firstnum += value;
+            display.value = firstnum;
+        } else {
+            secondnum += value;
+            display.value = firstnum + oper + secondnum;
+        }
+    }
+
+    function clearDisplay() {
+        display.value = "";
+        firstnum = "";
+        secondnum = "";
+        oper = "";
+    }
+
+    function backspace() {
+
+    // Typing first number
+    if (oper === "") {
+        firstnum = firstnum.slice(0, -1);
+        display.value = firstnum;
+    }
+
+    // Operator is present but second number hasn't started
+    else if (secondnum === "") {
+        oper = "";
+        display.value = firstnum;
+    }
+
+    // Typing second number
+    else {
+        secondnum = secondnum.slice(0, -1);
+
+        if (secondnum === "") {
+            display.value = firstnum + oper;
+        } else {
+            display.value = firstnum + oper + secondnum;
+        }
+    }
+
+}
+
+    function setOperator(op) {
+
+        if (firstnum === "") return;
+
+        oper = op;
+        display.value = firstnum + oper;
+    }
+
+    function calculate() {
+
+        if (firstnum === "" || secondnum === "" || oper === "") return;
+
+        let num1 = Number(firstnum);
+        let num2 = Number(secondnum);
+
+        let answer;
+
+        switch (oper) {
+
+            case "+":
+                answer = num1 + num2;
+                break;
+
+            case "-":
+                answer = num1 - num2;
+                break;
+
+            case "*":
+                answer = num1 * num2;
+                break;
+
+            case "/":
+                if (num2 === 0) {
+                    display.value = "Cannot divide by 0";
+                    firstnum = "";
+                    secondnum = "";
+                    oper = "";
+                    return;
+                }
+                answer = num1 / num2;
+                break;
+
+            case "%":
+                answer = num1 % num2;
+                break;
+
+            default:
+                display.value = "Error";
+                return;
+        }
+
+        display.value = answer;
+
+        // Allow continued calculations
+        firstnum = String(answer);
+        secondnum = "";
+        oper = "";
+    }
+
+    function changeSign() {
+
+        if (oper === "") {
+
+            if (firstnum === "") return;
+
+            firstnum = String(Number(firstnum) * -1);
+            display.value = firstnum;
+        }
+        else {
+
+            if (secondnum === "") return;
+
+            secondnum = String(Number(secondnum) * -1);
+            display.value = firstnum + oper + secondnum;
+        }
+    }
+</script>
+
+</html>
