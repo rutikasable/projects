@@ -8,7 +8,7 @@
 <body>
     
     <div class="calculator">
-        <input type="text" id="display">
+        <input type="text" id="display" readonly>
 
         <div class="buttons">
             <button onclick="clearDisplay()">C</button>
@@ -65,24 +65,32 @@
         text-align:right;
         font-size:25px;
         padding:10px;
+        border-radius: 10px;
     }
 
     .buttons{
         display:grid;
         grid-template-columns:repeat(4,90px);
-
+        gap:8px;
     }
 
     button{
         height:90px;
         font-size:20px;
         cursor:pointer;
+        border:none;
+        border-radius:10px;
+        transition:.2s;
+    }
+
+    button:hover{
+        opacity:.8;
     }
 
 </style>
 
 <script>
-    let display = document.querySelector("#display");
+    const display = document.getElementById("display");
 
     let firstnum = "";
     let secondnum = "";
@@ -109,42 +117,47 @@
     }
 
     function clearDisplay() {
-        display.value = "";
         firstnum = "";
         secondnum = "";
         oper = "";
+        display.value = "";
     }
 
     function backspace() {
 
-    // Typing first number
-    if (oper === "") {
-        firstnum = firstnum.slice(0, -1);
-        display.value = firstnum;
-    }
+        if (oper === "") {
 
-    // Operator is present but second number hasn't started
-    else if (secondnum === "") {
-        oper = "";
-        display.value = firstnum;
-    }
+            firstnum = firstnum.slice(0, -1);
+            display.value = firstnum;
 
-    // Typing second number
-    else {
-        secondnum = secondnum.slice(0, -1);
+        } else if (secondnum === "") {
 
-        if (secondnum === "") {
-            display.value = firstnum + oper;
+            oper = "";
+            display.value = firstnum;
+
         } else {
+
+            secondnum = secondnum.slice(0, -1);
             display.value = firstnum + oper + secondnum;
+
         }
     }
-
-}
 
     function setOperator(op) {
 
         if (firstnum === "") return;
+
+        // Change operator if second number hasn't been entered yet
+        if (oper !== "" && secondnum === "") {
+            oper = op;
+            display.value = firstnum + oper;
+            return;
+        }
+
+        // If already typing second number, calculate first
+        if (secondnum !== "") {
+            calculate();
+        }
 
         oper = op;
         display.value = firstnum + oper;
@@ -154,8 +167,8 @@
 
         if (firstnum === "" || secondnum === "" || oper === "") return;
 
-        let num1 = Number(firstnum);
-        let num2 = Number(secondnum);
+        const num1 = Number(firstnum);
+        const num2 = Number(secondnum);
 
         let answer;
 
@@ -175,10 +188,8 @@
 
             case "/":
                 if (num2 === 0) {
-                    display.value = "Cannot divide by 0";
-                    firstnum = "";
-                    secondnum = "";
-                    oper = "";
+                    alert("Cannot divide by zero");
+                    clearDisplay();
                     return;
                 }
                 answer = num1 / num2;
@@ -189,13 +200,12 @@
                 break;
 
             default:
-                display.value = "Error";
                 return;
         }
 
         display.value = answer;
 
-        // Allow continued calculations
+        // Store result for further calculations
         firstnum = String(answer);
         secondnum = "";
         oper = "";
@@ -209,13 +219,14 @@
 
             firstnum = String(Number(firstnum) * -1);
             display.value = firstnum;
-        }
-        else {
+
+        } else {
 
             if (secondnum === "") return;
 
             secondnum = String(Number(secondnum) * -1);
             display.value = firstnum + oper + secondnum;
+
         }
     }
 </script>
