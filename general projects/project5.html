@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+</head>
+<body>
+    <div>
+        <div id="heading">STOPWATCH</div>
+        <div id="showtime"></div>
+        <div>
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="lap">Lap</button>
+            <button id="resume">Resume</button>
+            <button id="reset">Reset</button>
+        </div>
+        <div id="laptime"></div>
+    </div>
+</body>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color:rgb(0,0,45);
+    color:aliceblue;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+body > div{
+    text-align:center;
+}
+
+#heading{
+    font-size:50px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+#showtime{
+    width:250px;
+    height:70px;
+    margin:20px auto;
+    background:aliceblue;
+    color:rgb(0,0,45);
+    border-radius:10px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:40px;
+    font-weight:bold;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+button{
+    width:90px;
+    height:45px;
+    margin:8px 5px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    opacity:0.85;
+}
+
+button:active{
+    transform:scale(0.96);
+}
+
+/* Optional button colors */
+
+#start,#stop,#resume,#lap,#reset {
+    background:#a4aaaf;
+    color: rgb(29, 29, 29);
+}
+    
+
+#laptime{
+    width:250px;
+    max-height:220px;
+    margin:25px auto 0;
+    padding:10px;
+    overflow-y:auto;
+}
+
+#laptime p{
+    background:white;
+    color:rgb(0,0,45);
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:6px;
+    font-weight:bold;
+}
+</style>
+
+<script>
+    let hr = 0;
+    let min = 0;
+    let sec = 0;
+
+    let showtime = document.querySelector("#showtime");
+
+
+
+    let start = document.querySelector("#start");
+
+    start.addEventListener('click', function(){
+        if (started) return;
+
+        started = true;
+        showtime.textContent = `${hr}:${min}:${sec}`;
+        starttime();
+    })
+
+    let time;
+    let running = false;
+    let started = false;
+
+    function starttime() {
+
+        if(running) return;
+
+        running = true;
+
+        time = setInterval(() => {
+            
+            sec++;
+            if(sec===60){
+                sec=0;
+                min++;
+            }
+
+            if(min===60){
+                min=0;
+                hr++;
+            }
+
+            if(hr===24){
+                hr=0;
+            }
+
+            showtime.textContent = `${hr}:${min}:${sec}`;
+
+        },1000)
+    }
+
+
+    
+    let stop = document.querySelector("#stop");
+
+    stop.addEventListener('click', function () {
+        clearInterval(time);
+        running = false;
+    })
+
+
+
+    let lap = document.querySelector("#lap");
+
+    let laptime = document.querySelector("#laptime");
+
+    let lapCount = 1;
+
+    lap.addEventListener("click", function () {
+
+        if(hr===0 && min===0 && sec===0) return;
+
+        let p = document.createElement("p");
+
+        p.textContent = `Lap ${lapCount}: ${hr}:${min}:${sec}`;
+
+        laptime.appendChild(p);
+
+        lapCount++;
+
+    });
+
+
+
+    let resume = document.querySelector("#resume");
+
+    resume.addEventListener("click", function () {
+
+        if (!started || running) return;
+        starttime();
+    });
+
+
+
+    let reset = document.querySelector("#reset");
+
+    reset.addEventListener('click', function () {
+        clearInterval(time);
+        running = false;
+        started = false;
+        hr = 0;
+        min = 0;
+        sec = 0;
+        showtime.textContent = `${hr}:${min}:${sec}`;
+
+        laptime.innerHTML = "";
+        lapCount = 1;
+    })
+</script>
+
+</html>
