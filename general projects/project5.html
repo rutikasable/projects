@@ -125,7 +125,7 @@ button:active{
         if (started) return;
 
         started = true;
-        showtime.textContent = `${hr}:${min}:${sec}`;
+        showtime.textContent =`${format(hr)}:${format(min)}:${format(sec)}`;
         starttime();
     })
 
@@ -156,7 +156,8 @@ button:active{
                 hr=0;
             }
 
-            showtime.textContent = `${hr}:${min}:${sec}`;
+            showtime.textContent =`${format(hr)}:${format(min)}:${format(sec)}`;
+
 
         },1000)
     }
@@ -184,7 +185,7 @@ button:active{
 
         let p = document.createElement("p");
 
-        p.textContent = `Lap ${lapCount}: ${hr}:${min}:${sec}`;
+        p.textContent = `Lap ${lapCount}: ${format(hr)}:${format(min)}:${format(sec)}`;
 
         laptime.appendChild(p);
 
@@ -213,11 +214,18 @@ button:active{
         hr = 0;
         min = 0;
         sec = 0;
-        showtime.textContent = `${hr}:${min}:${sec}`;
+        showtime.textContent =`${format(hr)}:${format(min)}:${format(sec)}`;
 
         laptime.innerHTML = "";
         lapCount = 1;
     })
+
+
+    function format(value) {
+        return String(value).padStart(2, "0");
+    }
+
+
 </script>
 
 </html>
