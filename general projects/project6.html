@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+</head>
+<body>
+    <div>
+        <p id="heading">COUNTDOWN TIMER</p>
+        <br>
+        <select name="HOURS" id="hr"></select>
+        <select name="MINUTES" id="min"></select>
+        <select name="SECONDS" id="sec"></select>
+
+    <br><br>
+        <button id="start">START</button>
+    </div>
+</body>
+
+<style>
+
+    body {
+        background-color: rgb(11, 22, 33);
+        color: aliceblue;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #heading {
+        font-size:50px;
+        font-weight:bold;
+        margin-bottom:25px;
+        text-align: center;
+    }
+
+    #hr,#min,#sec {
+        width: 60px;
+        height: 70px; 
+        text-align: center;
+        font-size:x-large;
+    }
+
+    #start {
+        width: 100px;
+        height: 60px;
+        font-size: x-large;
+    }
+
+</style>
+
+<script>
+
+    const hr = document.querySelector("#hr");
+    const min = document.querySelector("#min");
+    const sec = document.querySelector("#sec");
+
+    function fillOptions(select, end) {
+
+        for (let i = 0; i <= end; i++) {
+            let option = document.createElement("option");
+            option.value = i;
+            option.textContent = String(i).padStart(2, "0");
+            select.appendChild(option);
+        }
+    }
+    fillOptions(hr, 23);
+    fillOptions(min, 59);
+    fillOptions(sec, 59);
+
+
+    const start = document.querySelector("#start");
+
+    let time;
+    let running = false;
+
+    start.addEventListener('click', function(){
+
+        if (running) return;  
+        running = true;
+
+        hr.style.pointerEvents = "none";
+        min.style.pointerEvents = "none";
+        sec.style.pointerEvents = "none";
+
+        let hours = Number(hr.value);
+        let minutes = Number(min.value);
+        let seconds = Number(sec.value);
+
+        if(hours === 0 && minutes === 0 && seconds === 0){
+            running = false;
+            hr.style.pointerEvents = "auto";
+            min.style.pointerEvents = "auto";
+            sec.style.pointerEvents = "auto";
+            return;
+        }
+
+        hr.value = hours;
+        min.value = minutes;
+        sec.value = seconds;
+
+        time = setInterval(()=>{
+
+            if(hours===0 && minutes===0 && seconds===0){
+
+                clearInterval(time);
+                running = false;
+                hr.style.pointerEvents = "auto";
+                min.style.pointerEvents = "auto";
+                sec.style.pointerEvents = "auto";   
+                return;
+
+            }
+
+            seconds--;
+
+            if (seconds === -1){
+                seconds=59;
+                minutes--;
+            }
+
+            if (minutes === -1){
+                minutes=59;
+                hours--;
+            }
+
+
+            hr.value = hours;
+            min.value = minutes;
+            sec.value = seconds;
+        },1000)
+    })
+
+
+</script>
+
+</html>
