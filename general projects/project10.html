@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>github</title>
+</head>
+<body>
+    <div class="card">
+        <div>
+            <input type="text" id="username" placeholder="Enter username">
+            <br>
+            <button id="button">GET</button>
+        </div>
+        <div>
+            <p id="zero"></p>
+            <p id="one"></p>
+            <p id="two"></p>
+            <p id="three"></p>
+            <p id="four"></p>
+            <p id="five"></p>
+
+        </div> 
+    </div>       
+</body>
+<style>
+
+    body {  
+    background-color: #323232;
+    color: aliceblue;
+    margin: 0;
+    height : 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .card {
+        background-color: #212121;
+        border-radius: 25px;
+        width: 900px;
+        height: 750px;  
+        display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;      
+        text-align: center;    
+        font-size:x-large;  
+    }
+
+    #username{
+        text-align: center;
+        font-size: large;
+        margin-bottom: 20px;
+        height: 40px;
+        width: 200px;
+        border-radius: 50px;
+        border: black;
+    }
+
+    #button {
+        text-align: center;
+        font-size: large;
+        height: 40px;
+        width: 100px;
+        border-radius: 25px;
+        border: black;
+
+    }
+
+    #zero img {
+        height: 300px;
+        width: 300px;
+        border-radius: 150px;
+        object-fit: cover;
+        border: 2px solid aliceblue;
+    }
+    
+</style>
+<script>
+    
+    let zero = document.querySelector("#zero");
+    let one = document.querySelector("#one");
+    let two = document.querySelector("#two");
+    let three = document.querySelector("#three");
+    let four = document.querySelector("#four");
+    let five = document.querySelector("#five");
+    let button = document.querySelector("#button");
+
+    button.addEventListener('click',function() {
+
+        let username = document.querySelector("#username").value;
+        let link = `https://api.github.com/users/${username}`;
+        let x = new XMLHttpRequest();
+        x.open('GET',link);
+        x.onreadystatechange = function () {
+            if (x.readyState === 4 && x.status === 200) {
+                let a = JSON.parse(this.responseText);
+                show(a);   
+            }
+        }
+        x.send();
+    });
+
+    function show(a) {
+
+        zero.innerHTML = `<img src = "${a.avatar_url}">`;
+        one.textContent = `Name : ${a.name}`;
+        two.textContent = `Bio : ${a.bio}`;
+        three.textContent = `Followers : ${a.followers}`;
+        four.textContent = `Following : ${a.following}`;
+        five.textContent = `Public repositories : ${a.public_repos}`;
+        
+    }
+    
+</script>
+</html>
