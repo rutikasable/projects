@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>TO-DO APP</h1>
+
+        <div class="input-box">
+            <input type="text" id="task" placeholder="Enter a task">
+            <button id="add">Add</button>
+        </div>
+
+        <div id="task-list">
+            <ol id="list">
+
+            </ol>
+        </div>
+
+    </div>
+
+</body>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background:#00517daa;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+    }
+
+    .container{
+        width:400px;
+        background:white;
+        padding:30px;
+        border-radius:15px;
+        text-align:center;
+        box-shadow:0 10px 25px rgba(0,0,0,.3);
+    }
+
+    h1{
+        margin-bottom:25px;
+        color:#001926;
+    }
+
+    .input-box{
+        display:flex;
+        gap:10px;
+        margin-bottom:20px;
+    }
+
+    #task{
+        flex:1;
+        padding:12px;
+        font-size:16px;
+        border:2px solid whitesmoke;
+        border-radius:8px;
+        outline:none;
+    }
+
+    #task:focus{
+        border-color:#00517d;
+    }
+
+    #add{
+        padding:12px 20px;
+        border:none;
+        border-radius:8px;
+        background:#00517d;
+        color:aliceblue;
+        font-size:16px;
+        cursor:pointer;
+    }
+
+    #add:hover{
+        background:#004266;
+    }
+
+    #task-list{
+        margin-top:15px;
+    }
+
+    #list{
+        list-style:none;
+        margin-top:20px;
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    #list li{
+        background:#f3f6f8;
+        border:2px solid #d9e3ea;
+        border-radius:10px;
+        padding:12px 15px;
+
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+
+        font-size:18px;
+        color:#222;
+    }
+
+    .buttons{
+        display:flex;
+        gap:8px;
+    }
+
+    .done,
+    .delete{
+        width:35px;
+        height:35px;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:18px;
+        font-weight:bold;
+        color:white;
+    }
+
+    .done{
+        background:#28a745;
+    }
+
+    .done:hover{
+        background:#218838;
+    }
+
+    .completed{
+        text-decoration: line-through;
+        color: gray;
+    }
+
+    .edit{
+        width:35px;
+        height:35px;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:18px;
+        font-weight:bold;
+        color:white;
+        background:#007bff;
+    }
+
+    .edit:hover{
+        background:#0056b3;
+    }
+
+    .delete{
+        background:#dc3545;
+    }
+
+    .delete:hover{
+        background:#c82333;
+    }
+</style>
+
+<script>
+    let task = document.querySelector("#task");
+    let btn = document.querySelector("#add");
+    let list = document.querySelector("#list");
+
+    task.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            btn.click();
+        }
+    });
+
+    btn.addEventListener("click", () => {
+
+        if (task.value.trim() === "") return;
+
+        let li = document.createElement("li");
+
+        li.innerHTML = 
+        `<span>${task.value}</span>
+
+            <div class="buttons">
+                <button class="done">✔</button>
+                <button class="edit">✏</button>
+                <button class="delete">✖</button>
+            </div>`;
+
+        list.appendChild(li);
+
+        task.value = "";
+        task.focus();
+        
+        let done = li.querySelector(".done");
+
+        done.addEventListener("click", () => {
+            let text = li.querySelector("span");
+            text.classList.toggle("completed");
+        });
+
+                
+        let edit = li.querySelector(".edit");
+
+        edit.addEventListener("click", () => {
+
+            let text = li.querySelector("span");
+
+            let newTask = prompt("Edit task:", text.textContent);
+
+            if (newTask !== null && newTask.trim() !== "") {
+                text.textContent = newTask;
+            }
+
+        });
+
+        let del = li.querySelector(".delete");
+
+        del.addEventListener("click", () => {
+            if(confirm("Delete this task?")){
+                li.remove();
+            }
+        });
+
+    });
+        
+
+
+</script>
+
+</html>
